@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BVGF.Pages.signupPage"
+             Title="Sign Up"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <StackLayout Padding="10,10" Spacing="25">
+
+            <!-- Logo/Header Section -->
+            <StackLayout HorizontalOptions="Center" Margin="0,0,0,0">
+                <Frame BackgroundColor="White" 
+                       HasShadow="True" 
+                       CornerRadius="60" 
+                       WidthRequest="120" 
+                       HeightRequest="120"
+                       HorizontalOptions="Center"
+                       Padding="10">
+                    <Image Source="logo.jpeg" 
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center"
+                           Aspect="AspectFit"/>
+                </Frame>
+                <Label Text="Create Account" 
+                       FontSize="30" 
+                       FontAttributes="Bold" 
+                       TextColor="#2D2D2D" 
+                       HorizontalOptions="Center" 
+                       Margin="0,10,0,10"/>
+                <Label Text="Join us today!" 
+                       FontSize="16" 
+                       TextColor="#555555" 
+                       HorizontalOptions="Center"
+                       />
+            </StackLayout>
+
+            <!-- Input Fields Template -->
+            <Frame BackgroundColor="White" 
+                   HasShadow="True" 
+                   CornerRadius="15" 
+                   Padding="20"
+                   Margin="10,-18,10,10">
+                <StackLayout Spacing="15">
+                    <!-- Full Name Input -->
+                    <Entry x:Name="FullNameEntry" 
+                           Placeholder="Full Name" 
+                           FontSize="16"
+                           PlaceholderColor="#999999"  
+                           BackgroundColor="#F8F8F8"
+                           HeightRequest="50"
+                           Margin="0,5"/>
+
+                    <!-- Email Input -->
+                    <Entry x:Name="EmailEntry" 
+                           Placeholder="Email Address" 
+                           Keyboard="Email"
+                           FontSize="16"
+                           PlaceholderColor="#999999"
+                           BackgroundColor="#F8F8F8"
+                           HeightRequest="50"
+                           Margin="0,5"/>
+
+                    <!-- Phone Input -->
+                    <Entry x:Name="PhoneEntry" 
+                           Placeholder="Phone Number" 
+                           Keyboard="Telephone"
+                           FontSize="16"
+                           PlaceholderColor="#999999"
+                           BackgroundColor="#F8F8F8"
+                           HeightRequest="50"
+                           Margin="0,5"/>
+
+                    <!-- Password Input -->
+                    <Entry x:Name="PasswordEntry" 
+                           Placeholder="Password" 
+                           IsPassword="True" 
+                           FontSize="16"
+                           PlaceholderColor="#999999"
+                           BackgroundColor="#F8F8F8"
+                           HeightRequest="50"
+                           Margin="0,5"/>
+
+                    <!-- Confirm Password Input -->
+                    <Entry x:Name="ConfirmPasswordEntry" 
+                           Placeholder="Confirm Password" 
+                           IsPassword="True" 
+                           FontSize="16"
+                           PlaceholderColor="#999999"
+                           BackgroundColor="#F8F8F8"
+                           HeightRequest="50"
+                           Margin="0,5"/>
+                </StackLayout>
+            </Frame>
+
+            <!-- Terms Checkbox -->
+            <StackLayout Orientation="Horizontal" Margin="10,-35,10,10">
+                <CheckBox x:Name="TermsCheckBox" Color="#4A90E2" VerticalOptions="Center"/>
+                <Label Text="I agree to the Terms and Conditions" 
+                       FontSize="14" 
+                       TextColor="#555555" 
+                       VerticalOptions="Center"/>
+            </StackLayout>
+
+            <!-- Sign Up Button -->
+            <Button x:Name="SignUpButton" 
+                    Text="CREATE ACCOUNT" 
+                    BackgroundColor="#4A90E2" 
+                    TextColor="White" 
+                    FontSize="16" 
+                    FontAttributes="Bold" 
+                    CornerRadius="12" 
+                    HeightRequest="50"
+                    Margin="10,-20,10,10"
+                    Clicked="OnSignUpClicked"/>
+            
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator x:Name="LoadingIndicator" 
+                              IsVisible="False" 
+                              IsRunning="False" 
+                              Color="#4A90E2" 
+                              HorizontalOptions="Center"
+                              Margin="0,10"/>
+
+            <!-- Login Link -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,-20,0,20">
+                <Label Text="Already have an account? " 
+                       FontSize="14" 
+                       TextColor="#555555"/>
+                <Label Text="Login" 
+                       FontSize="14" 
+                       TextColor="#4A90E2" 
+                       FontAttributes="Bold">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnLoginTapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="BVGF_Mobile.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:BVGF_Mobile"
+    xmlns:pages="clr-namespace:BVGF.Pages"
+    Title="BVGF_Mobile">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+    <ShellContent 
+        Title="Login"
+        ContentTemplate="{DataTemplate pages:loginPage}"
+        Route="loginPage"
+        IsVisible="False" />
+
+    <ShellContent
+        Title="Signup"
+        ContentTemplate="{DataTemplate pages:signupPage}"
+        Route="signupPage"
+        IsVisible="False" />
+</Shell>

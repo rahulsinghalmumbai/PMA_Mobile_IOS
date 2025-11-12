@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BVGF.Pages.SplashPage"
+             BackgroundColor="#F8F9FA"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="2,2">
+            <GradientStop Color="#00BCD4" Offset="0.0" />
+            <GradientStop Color="#F8F9FA" Offset="1.0" />
+            <GradientStop Color="#00BCD4" Offset="2.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="30">
+
+            <Frame x:Name="LogoFrame"
+                   CornerRadius="120"
+                   WidthRequest="200"
+                   HeightRequest="200"
+                   Padding="0"
+                   Margin="23,0,0,0"
+                   HasShadow="True"
+                   BorderColor="#00BCD4"
+                   BackgroundColor="#00BCD4"
+                   HorizontalOptions="Center"
+                   Scale="0.8">
+
+                <Frame.Shadow>
+                    <Shadow Brush="Black" Offset="12,12" Radius="50" Opacity="0.5" />
+                </Frame.Shadow>
+
+                <Grid>
+                  
+                    <Image x:Name="SplashImage"
+                           Source="logo.jpeg"
+                           Aspect="AspectFill" 
+                           Opacity="0.9"/>
+
+                    <Ellipse Fill="#00BCD4" 
+                             Opacity="0.1" 
+                             x:Name="PulseOverlay"/>
+                </Grid>
+            </Frame>
+
+          
+            <Label x:Name="AppTitle"
+                   Text="PMA"
+                   FontSize="36"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center"
+                   Opacity="0"/>
+
+           
+            <Label x:Name="SubTitle"
+                   Text="Welcome to your app"
+                   FontSize="18"
+                   TextColor="#E0E0E0"
+                   HorizontalOptions="Center"
+                   Opacity="0"/>
+
+         
+            <StackLayout x:Name="LoadingSection" 
+                         Orientation="Horizontal" 
+                         HorizontalOptions="Center" 
+                         Spacing="10"
+                         Opacity="0">
+
+                <ActivityIndicator x:Name="LoadingIndicator"
+                                   IsRunning="True"
+                                   Color="White"
+                                   Scale="1.2"/>
+
+                <Label Text="Loading..."
+                       TextColor="White"
+                       FontSize="16"
+                       VerticalOptions="Center"/>
+            </StackLayout>
+
+        
+            <ProgressBar x:Name="LoadingProgress"
+                         Progress="0"
+                         ProgressColor="White"
+                         BackgroundColor="#E0E0E0"
+                         WidthRequest="200"
+                         HeightRequest="8"
+                         Opacity="0"/>
+
+        </StackLayout>
+
+       
+        <Button x:Name="SkipButton"
+                Text="Skip"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                FontSize="16"
+                CornerRadius="20"
+                Padding="20,10"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Margin="20,50,20,0"
+                Opacity="0"
+                Clicked="OnSkipClicked"/>
+
+        <Label x:Name="VersionLabel"
+               Text="Version 14.0"
+               TextColor="White"
+               FontSize="12"
+               HorizontalOptions="Center"
+               VerticalOptions="End"
+               Margin="0,0,0,30"
+               Opacity="0"/>
+
+    </Grid>
+</ContentPage>

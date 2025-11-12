@@ -1,0 +1,431 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BVGF.Pages.history"
+             BackgroundColor="#F5F7FA"
+             NavigationPage.HasNavigationBar="False">
+    <!--<Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        --><!-- Header - Fixed with no margin and proper back button --><!--
+        <Frame Grid.Row="0" 
+               BackgroundColor="#00BCD4" 
+               HasShadow="True"
+               CornerRadius="0"
+               Padding="0"
+               Margin="0,0,0,0">
+            <Grid Margin="0,0,5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="60"/>
+                </Grid.ColumnDefinitions>
+
+                --><!-- Back Button - properly centered --><!--
+                <Button Grid.Column="0"
+                        Text="←"
+                        FontSize="30"
+                        Clicked="OnBackClicked"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        BackgroundColor="Transparent"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Margin="-10,-10,10,0"/>
+
+                --><!-- Title - centered properly --><!--
+                <StackLayout Grid.Column="1" 
+                             Orientation="Horizontal"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center">
+                    <Label Text="📋" FontSize="22" VerticalOptions="Center"/>
+                    <Label Text="History"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           VerticalOptions="Center"
+                           />
+                </StackLayout>
+
+                --><!-- Search Button --><!--
+                <Button Grid.Column="2"
+                        Text="🔍"
+                        FontSize="20"
+                        TextColor="White"
+                        BackgroundColor="Transparent"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Margin="0"/>
+            </Grid>
+        </Frame>
+
+        --><!-- Main Content --><!--
+        <ScrollView Grid.Row="1" 
+                    Padding="5,1,5,1"
+                    Margin="5,10,0,0">
+            <StackLayout Spacing="0">
+
+                --><!-- Statistics Cards --><!--
+                <Grid Margin="5,0,1,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    --><!-- Total Records --><!--
+                    <Frame Grid.Column="0"
+                           BackgroundColor="White"
+                           HasShadow="True"
+                           WidthRequest="105"
+                           HeightRequest="100"
+                           CornerRadius="15"
+                           Margin="2">
+                        <StackLayout Spacing="1" Padding="0">
+                            <Label Text="📊" FontSize="20" HorizontalOptions="Center"/>
+                            <Label Text="Total" FontSize="12" TextColor="#666" HorizontalOptions="Center"/>
+                            <Label Text="25" FontSize="16" FontAttributes="Bold" TextColor="#00BCD4" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+
+                    --><!-- Today's Records --><!--
+                    <Frame Grid.Column="1"
+                           BackgroundColor="White"
+                           HasShadow="True"
+                            WidthRequest="105"
+                            HeightRequest="100"
+                           CornerRadius="15"
+                           Margin="2">
+                        <StackLayout Spacing="1" Padding="0">
+                            <Label Text="📅" FontSize="20" HorizontalOptions="Center"/>
+                            <Label Text="Today" FontSize="12" TextColor="#666" HorizontalOptions="Center"/>
+                            <Label Text="8" FontSize="16" FontAttributes="Bold" TextColor="#4CAF50" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+
+                    --><!-- Recent --><!--
+                    <Frame Grid.Column="2"
+                           BackgroundColor="White"
+                           HasShadow="True"
+                            WidthRequest="105"
+                            HeightRequest="100"
+                           CornerRadius="15"
+                           Margin="2">
+                        <StackLayout Spacing="1" Padding="0">
+                            <Label Text="⏰" FontSize="20" HorizontalOptions="Center"/>
+                            <Label Text="Recent" FontSize="12" TextColor="#666" HorizontalOptions="Center"/>
+                            <Label Text="5" FontSize="16" FontAttributes="Bold" TextColor="#FF9800" HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+
+                --><!-- Filter Tabs --><!--
+                <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                    <StackLayout Orientation="Horizontal" Spacing="10" Padding="5">
+                        <Frame BackgroundColor="#00BCD4" HasShadow="False" CornerRadius="20" Padding="15,8">
+                            <Label Text="All" TextColor="White" FontSize="14" FontAttributes="Bold"/>
+                        </Frame>
+                        <Frame BackgroundColor="White" HasShadow="True" CornerRadius="20" Padding="15,8">
+                            <Label Text="Today" TextColor="#666" FontSize="14"/>
+                        </Frame>
+                        <Frame BackgroundColor="White" HasShadow="True" CornerRadius="20" Padding="15,8">
+                            <Label Text="This Week" TextColor="#666" FontSize="14"/>
+                        </Frame>
+                        <Frame BackgroundColor="White" HasShadow="True" CornerRadius="20" Padding="15,8">
+                            <Label Text="This Month" TextColor="#666" FontSize="14"/>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+
+                --><!-- History Records --><!--
+                <StackLayout Spacing="12">
+
+                    --><!-- Record 1 --><!--
+                    <Frame BackgroundColor="White" HasShadow="True" CornerRadius="15" Padding="15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            --><!-- Company Header --><!--
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                    <Frame BackgroundColor="#E3F2FD" CornerRadius="20" Padding="8,4" HasShadow="False">
+                                        <Label Text="🏢" FontSize="12"/>
+                                    </Frame>
+                                    <Label Text="Tech Solutions Pvt Ltd"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#333"
+                                           VerticalOptions="Center"
+                                           Margin="10,0,0,0"/>
+                                </StackLayout>
+
+                                <Frame Grid.Column="1"
+                                       BackgroundColor="#FFF3E0"
+                                       CornerRadius="15"
+                                       Padding="10,5"
+                                       HasShadow="False">
+                                    <Label Text="3 hours ago"
+                                           FontSize="12"
+                                           TextColor="#FF9800"
+                                           FontAttributes="Bold"/>
+                                </Frame>
+                            </Grid>
+
+                            --><!-- Details --><!--
+                            <Grid Grid.Row="1" Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label Text="👤" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="Vivek" FontSize="14" TextColor="#555" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
+                                        <Label Text="🏙️" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="Delhi" FontSize="14" TextColor="#555" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label Text="💼" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="IT Services" FontSize="14" TextColor="#555" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
+                                        <Label Text="📱" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="+91 98765 43210" FontSize="14" TextColor="#00BCD4" FontAttributes="Bold" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+
+                            --><!-- Action Buttons --><!--
+                            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="End" Spacing="5" Margin="0,15,0,0">
+                                <Frame BackgroundColor="#E8F5E8" CornerRadius="20" Padding="10,5" HasShadow="False">
+                                    <Label Text="📞 Call" FontSize="12" TextColor="#4CAF50" FontAttributes="Bold"/>
+                                </Frame>
+                                <Frame BackgroundColor="#FFF3E0" CornerRadius="20" Padding="10,5" HasShadow="False">
+                                    <Label Text="💬 SMS" FontSize="12" TextColor="#FF9800" FontAttributes="Bold"/>
+                                </Frame>
+                                <Frame BackgroundColor="#FFEBEE" CornerRadius="20" Padding="10,5" HasShadow="False">
+                                    <Label Text="🗑️" FontSize="12" TextColor="#F44336" FontAttributes="Bold"/>
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+
+                    --><!-- Record 2 --><!--
+                    <Frame BackgroundColor="White" HasShadow="True" CornerRadius="15" Padding="15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            --><!-- Company Header --><!--
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                    <Frame BackgroundColor="#F3E5F5" CornerRadius="20" Padding="8,4" HasShadow="False">
+                                        <Label Text="🏪" FontSize="12"/>
+                                    </Frame>
+                                    <Label Text="ABC Marketing Agency"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#333"
+                                           VerticalOptions="Center"
+                                           Margin="10,0,0,0"/>
+                                </StackLayout>
+
+                                <Frame Grid.Column="1"
+                                       BackgroundColor="#E8F5E8"
+                                       CornerRadius="15"
+                                       Padding="10,5"
+                                       HasShadow="False">
+                                    <Label Text="1 day ago"
+                                           FontSize="12"
+                                           TextColor="#4CAF50"
+                                           FontAttributes="Bold"/>
+                                </Frame>
+                            </Grid>
+
+                            --><!-- Details --><!--
+                            <Grid Grid.Row="1" Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label Text="👤" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="Rahul Sharma" FontSize="14" TextColor="#555" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
+                                        <Label Text="🏙️" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="Mumbai" FontSize="14" TextColor="#555" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label Text="💼" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="Marketing" FontSize="14" TextColor="#555" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
+                                        <Label Text="📱" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="+91 87654 32109" FontSize="14" TextColor="#00BCD4" FontAttributes="Bold" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+
+                            --><!-- Action Buttons --><!--
+                            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="End" Spacing="5" Margin="0,15,0,0">
+                                <Frame BackgroundColor="#E8F5E8" CornerRadius="20" Padding="10,5" HasShadow="False">
+                                    <Label Text="📞 Call" FontSize="12" TextColor="#4CAF50" FontAttributes="Bold"/>
+                                </Frame>
+                                <Frame BackgroundColor="#FFF3E0" CornerRadius="20" Padding="10,5" HasShadow="False">
+                                    <Label Text="💬 SMS" FontSize="12" TextColor="#FF9800" FontAttributes="Bold"/>
+                                </Frame>
+                                <Frame BackgroundColor="#FFEBEE" CornerRadius="20" Padding="10,5" HasShadow="False">
+                                    <Label Text="🗑️" FontSize="12" TextColor="#F44336" FontAttributes="Bold"/>
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+
+                    --><!-- Record 3 --><!--
+                    <Frame BackgroundColor="White" HasShadow="True" CornerRadius="15" Padding="15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            --><!-- Company Header --><!--
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                    <Frame BackgroundColor="#E8F5E8" CornerRadius="20" Padding="8,4" HasShadow="False">
+                                        <Label Text="🏭" FontSize="12"/>
+                                    </Frame>
+                                    <Label Text="Digital Solutions Inc"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="#333"
+                                           VerticalOptions="Center"
+                                           Margin="10,0,0,0"/>
+                                </StackLayout>
+
+                                <Frame Grid.Column="1"
+                                       BackgroundColor="#F3E5F5"
+                                       CornerRadius="15"
+                                       Padding="10,5"
+                                       HasShadow="False">
+                                    <Label Text="2 days ago"
+                                           FontSize="12"
+                                           TextColor="#9C27B0"
+                                           FontAttributes="Bold"/>
+                                </Frame>
+                            </Grid>
+
+                            --><!-- Details --><!--
+                            <Grid Grid.Row="1" Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label Text="👤" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="Priya Singh" FontSize="14" TextColor="#555" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
+                                        <Label Text="🏙️" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="Bangalore" FontSize="14" TextColor="#555" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label Text="💼" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="Software Dev" FontSize="14" TextColor="#555" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal" Spacing="8" Margin="0,5,0,0">
+                                        <Label Text="📱" FontSize="14" VerticalOptions="Center"/>
+                                        <Label Text="+91 76543 21098" FontSize="14" TextColor="#00BCD4" FontAttributes="Bold" VerticalOptions="Center"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Grid>
+
+                            --><!-- Action Buttons --><!--
+                            <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="End" Spacing="5" Margin="0,15,0,0">
+                                <Frame BackgroundColor="#E8F5E8" CornerRadius="20" Padding="10,5" HasShadow="False">
+                                    <Label Text="📞 Call" FontSize="12" TextColor="#4CAF50" FontAttributes="Bold"/>
+                                </Frame>
+                                <Frame BackgroundColor="#FFF3E0" CornerRadius="20" Padding="10,5" HasShadow="False">
+                                    <Label Text="💬 SMS" FontSize="12" TextColor="#FF9800" FontAttributes="Bold"/>
+                                </Frame>
+                                <Frame BackgroundColor="#FFEBEE" CornerRadius="20" Padding="10,5" HasShadow="False">
+                                    <Label Text="🗑️" FontSize="12" TextColor="#F44336" FontAttributes="Bold"/>
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+
+                    --><!-- Load More Button --><!--
+                    <Frame BackgroundColor="#00BCD4" HasShadow="True" CornerRadius="25" Padding="0" Margin="20,10,20,20">
+                        <Button Text="Load More Records"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                BackgroundColor="Transparent"/>
+                    </Frame>
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+        --><!-- Floating Add Button --><!--
+        <Frame Grid.Row="1"
+               BackgroundColor="#FF5722"
+               CornerRadius="30"
+               WidthRequest="60"
+               HeightRequest="60"
+               HasShadow="True"
+               HorizontalOptions="End"
+               VerticalOptions="End"
+               Margin="20,0,20,30"
+               Padding="0">
+            <Button Text="+"
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    BackgroundColor="Transparent"/>
+        </Frame>
+    </Grid>-->
+</ContentPage>

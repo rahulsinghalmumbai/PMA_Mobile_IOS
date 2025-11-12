@@ -1,0 +1,51 @@
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BVGF.CustomControls.CustomToastControl"
+             x:Name="ToastControl">
+
+    <AbsoluteLayout>
+
+        <Frame x:Name="ToastFrame"
+               BackgroundColor="{AppThemeBinding Light=#CECECE, Dark=#333333}"
+               CornerRadius="12"
+               Padding="8,5"
+               HeightRequest="30"
+               AbsoluteLayout.LayoutBounds="0.5,0.70,200,-1"
+               AbsoluteLayout.LayoutFlags="PositionProportional"
+               IsVisible="False"
+               Opacity="0"
+               HasShadow="True">
+
+            <StackLayout Orientation="Horizontal"
+                         Spacing="5"
+                         VerticalOptions="Center"
+                         HeightRequest="40"
+                         Padding="0">
+
+                <Frame Padding="0"
+                       WidthRequest="20"
+                       HeightRequest="20"
+                       CornerRadius="9999"
+                       IsClippedToBounds="True"
+                       VerticalOptions="Center"
+                       BackgroundColor="White"
+                       HasShadow="False">
+                    <Image Source="logo.jpeg"
+                           WidthRequest="22"
+                           HeightRequest="22"
+                           Aspect="AspectFill"
+                           VerticalOptions="Center" />
+                </Frame>
+
+                <Label x:Name="ToastLabel"
+                       FontSize="13"
+                       TextColor="White"
+                       VerticalOptions="Center"
+                       VerticalTextAlignment="Center"
+                       LineBreakMode="WordWrap"
+                       MaximumWidthRequest="250" />
+            </StackLayout>
+        </Frame>
+
+    </AbsoluteLayout>
+</ContentView>
