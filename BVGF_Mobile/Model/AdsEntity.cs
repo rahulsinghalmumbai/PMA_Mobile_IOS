@@ -21,7 +21,7 @@ namespace BVGF.Model
         public long? PriorityLevel { get; set; }
         public DateTime? CreateAt { get; set; }
         public DateTime? UpdateAt { get; set; }
-    }
+    }//for ios some changes
     public enum AdType
     {
         Native = 1,
