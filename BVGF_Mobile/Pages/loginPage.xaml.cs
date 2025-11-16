@@ -19,12 +19,38 @@ namespace BVGF.Pages
             _simService = new SimCardService();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // Force enable for macOS - using MainThread instead of Dispatcher
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                LoginButton.IsEnabled = true;
+                PasswordEntry.IsEnabled = true;
+                System.Diagnostics.Debug.WriteLine("=== Controls Enabled ===");
+            });
+        }
+
+        // Entry completed event (when user presses Enter)
+        private void OnEntryCompleted(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("=== Entry Completed - Enter Pressed ===");
+            OnLoginClicked(sender, e);
+        }
+
+        // Button pressed event (macOS fallback)
+        private void OnLoginPressed(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("=== BUTTON PRESSED (macOS) ===");
+        }
+
         private async void OnLoginClicked(object sender, EventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("=== LOGIN BUTTON CLICKED ===");
+
             if (string.IsNullOrWhiteSpace(PasswordEntry.Text))
             {
-                await Toast.ShowAsync("Please enter mobile number");
-
                 await DisplayAlert("Error", "Please enter mobile number", "OK");
                 return;
             }
@@ -69,14 +95,14 @@ namespace BVGF.Pages
                    isLoginSuccessful.Status == "Success" &&
                    isLoginSuccessful.Message == "Login Successfully")
                 {
-                    
+
                     await SecureStorage.SetAsync("logged_in_mobile", PasswordEntry.Text.Trim());
                     // await DisplayAlert("Success", "Login successful!", "OK");
                     //await Navigation.PushAsync(new homePage());
                     var speechToText = Handler.MauiContext.Services.GetService<ISpeechToText>();
-                   
+
                     await Navigation.PushAsync(new homePage(speechToText));
-                     Navigation.RemovePage(this);
+                    Navigation.RemovePage(this);
                 }
                 else
                 {
@@ -91,7 +117,7 @@ namespace BVGF.Pages
             }
             finally
             {
-               
+
                 LoginButton.IsEnabled = true;
                 LoginButton.Text = "LOGIN";
             }
@@ -157,20 +183,20 @@ namespace BVGF.Pages
         //    }
         //}
 
-       
+
         private async void OnForgotPasswordTapped(object sender, EventArgs e)
         {
-          
+
         }
 
         private async void OnSignUpTapped(object sender, EventArgs e)
         {
-           
+
         }
 
         protected override bool OnBackButtonPressed()
         {
-            
+
             return base.OnBackButtonPressed();
         }
     }
