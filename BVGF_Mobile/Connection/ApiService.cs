@@ -12,42 +12,111 @@ namespace BVGF.Connection
         private readonly HttpClient _httpClient;
         public ApiService()
         {
-            _httpClient = new HttpClient
+            try
             {
-                BaseAddress = new Uri(AppSettings.BaseApiUrl)
-            };
+                // Create handler that bypasses SSL validation for development
+                var handler = new HttpClientHandler();
+
+#if MACCATALYST || IOS
+                // For macOS/iOS - disable SSL validation for HTTP
+                handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
+#endif
+
+                _httpClient = new HttpClient(handler)
+                {
+                    BaseAddress = new Uri(AppSettings.BaseApiUrl),
+                    Timeout = TimeSpan.FromSeconds(30)
+                };
+
+                System.Diagnostics.Debug.WriteLine($"=== API Base URL: {AppSettings.BaseApiUrl} ===");
+                System.Diagnostics.Debug.WriteLine($"=== HttpClient Created Successfully ===");
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"=== ERROR in ApiService Constructor: {ex.Message} ===");
+                throw;
+            }
+        
         }
         public async Task<ApiResponse<MstMember>> LoginAsync(string usermobile)
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine($"=== LOGIN STARTED for mobile: {usermobile} ===");
+
                 var url = $"{Endpoints.Login}?MobileNo={usermobile}";
+
+                System.Diagnostics.Debug.WriteLine($"=== Full URL: {_httpClient.BaseAddress}{url} ===");
+                System.Diagnostics.Debug.WriteLine($"=== Making GET request... ===");
+
                 var response = await _httpClient.GetAsync(url);
+
+                System.Diagnostics.Debug.WriteLine($"=== Response received ===");
+                System.Diagnostics.Debug.WriteLine($"=== Status Code: {response.StatusCode} ===");
+                System.Diagnostics.Debug.WriteLine($"=== Is Success: {response.IsSuccessStatusCode} ===");
 
                 if (response.IsSuccessStatusCode)
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
+
+                    System.Diagnostics.Debug.WriteLine($"=== Response Body: {responseBody} ===");
+
                     var result = JsonSerializer.Deserialize<ApiResponse<MstMember>>(responseBody, new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     });
 
+                    System.Diagnostics.Debug.WriteLine($"=== Deserialization successful ===");
+
                     if (result?.Data?.MemberID != null)
                     {
                         var memberId = result.Data.MemberID.ToString();
                         await SecureStorage.SetAsync("member_id", memberId);
+                        System.Diagnostics.Debug.WriteLine($"=== Member ID saved: {memberId} ===");
                     }
 
                     return result;
                 }
                 else
                 {
+                    var errorBody = await response.Content.ReadAsStringAsync();
+                    System.Diagnostics.Debug.WriteLine($"=== API Error Response: {errorBody} ===");
                     return null;
                 }
             }
+            catch (TaskCanceledException tcEx)
+            {
+                System.Diagnostics.Debug.WriteLine($"=== TIMEOUT ERROR: Request timed out ===");
+                System.Diagnostics.Debug.WriteLine($"=== Message: {tcEx.Message} ===");
+                throw new Exception("Request timed out. Please check your internet connection.");
+            }
+            catch (HttpRequestException httpEx)
+            {
+                System.Diagnostics.Debug.WriteLine($"=== HTTP REQUEST ERROR ===");
+                System.Diagnostics.Debug.WriteLine($"=== Message: {httpEx.Message} ===");
+                System.Diagnostics.Debug.WriteLine($"=== Inner Exception: {httpEx.InnerException?.Message} ===");
+                System.Diagnostics.Debug.WriteLine($"=== Stack Trace: {httpEx.StackTrace} ===");
+                throw new Exception($"Network error: {httpEx.Message}");
+            }
+            catch (JsonException jsonEx)
+            {
+                System.Diagnostics.Debug.WriteLine($"=== JSON PARSING ERROR ===");
+                System.Diagnostics.Debug.WriteLine($"=== Message: {jsonEx.Message} ===");
+                throw new Exception("Failed to parse server response.");
+            }
             catch (Exception ex)
             {
-                Console.WriteLine("Login API Exception: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine($"=== GENERAL ERROR ===");
+                System.Diagnostics.Debug.WriteLine($"=== Exception Type: {ex.GetType().Name} ===");
+                System.Diagnostics.Debug.WriteLine($"=== Message: {ex.Message} ===");
+                System.Diagnostics.Debug.WriteLine($"=== Stack Trace: {ex.StackTrace} ===");
+
+                if (ex.InnerException != null)
+                {
+                    System.Diagnostics.Debug.WriteLine($"=== Inner Exception: {ex.InnerException.Message} ===");
+                    System.Diagnostics.Debug.WriteLine($"=== Inner Stack Trace: {ex.InnerException.StackTrace} ===");
+                }
+
                 throw;
             }
         }

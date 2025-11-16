@@ -12,12 +12,10 @@ namespace BVGF_Mobile
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-
-
             builder
                 .UseMauiApp<App>()
                   .UseSkiaSharp()
-                .UseMauiCommunityToolkit() 
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -25,16 +23,22 @@ namespace BVGF_Mobile
                     fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons");
                 });
 
+#if MACCATALYST
+            // macOS specific configuration for better event handling
+            builder.ConfigureMauiHandlers(handlers =>
+            {
+                // Remove the problematic handler configuration
+                // It's not needed for basic functionality
+            });
+#endif
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-
             builder.Services.AddSingleton<HttpClient>();
             builder.Services.AddSingleton<ApiService>();
             builder.Services.AddSingleton<ISpeechToText>(SpeechToText.Default);
             builder.Services.AddTransient<homePage>();
-
-
             return builder.Build();
         }
     }

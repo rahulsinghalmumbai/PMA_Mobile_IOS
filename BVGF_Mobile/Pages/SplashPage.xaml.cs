@@ -128,6 +128,7 @@ namespace BVGF.Pages
         {
             try
             {
+                //await Navigation.PushAsync(new test());
                 await Navigation.PushAsync(new loginPage());
                 Navigation.RemovePage(this);
             }
