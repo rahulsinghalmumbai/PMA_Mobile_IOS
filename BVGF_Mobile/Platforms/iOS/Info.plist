@@ -62,5 +62,19 @@
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
 
+		<!-- ✅ CORRECT: App Icon Configuration - ROOT LEVEL -->
+		<key>XSAppIconAssets</key>
+		<string>Assets.xcassets/AppIcon.appiconset</string>
+
+		<!-- Optional: Traditional iOS icon config -->
+		<key>CFBundleIcons</key>
+		<dict>
+			<key>CFBundlePrimaryIcon</key>
+			<dict>
+				<key>CFBundleIconName</key>
+				<string>AppIcon</string>
+			</dict>
+		</dict>
+
 	</dict>
 </plist>
