@@ -36,6 +36,9 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+
+		<!-- ❌ TEMPORARILY COMMENTED: Icon Configuration -->
+		<!-- <ApplicationIcon>Resources\AppIcon\appicon.png</ApplicationIcon> -->
 	</PropertyGroup>
 
 	<!-- macOS Catalyst specific configuration for HTTP support -->
@@ -52,7 +55,9 @@
 	<ItemGroup>
 		<!-- App Icon -->
 
-		<MauiIcon Include="Resources\AppIcon\appicon.png" />
+		<!-- ❌ TEMPORARILY COMMENTED: Problematic Icon -->
+		 <MauiIcon Include="Resources\AppIcon\appicon.png" IsAppIcon="true" /> 
+		<!-- <MauiIcon Include="Resources\AppIcon\appicon1.svg" IsAppIcon="false" /> -->
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Splash\splash.png" />
@@ -78,6 +83,11 @@
 	<!-- Include macOS specific files -->
 	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
 		<BundleResource Include="Platforms\MacCatalyst\Info.plist" />
+	</ItemGroup>
+
+	<!-- ✅ ADDED: iOS Assets Configuration -->
+	<ItemGroup Condition="'$(TargetFramework)'=='net9.0-ios'">
+		<BundleResource Include="Platforms\iOS\Assets.xcassets\**\*" />
 	</ItemGroup>
 
 	<!--<ItemGroup>
@@ -148,12 +158,20 @@
 		<CodesignKey>Apple Development: Created via API (MF33LFBC4B)</CodesignKey>
 		<CodesignProvision>VS: WildCard Development</CodesignProvision>
 
+		<!-- ✅ ADDED: iOS Icon Specific Properties -->
+		<AssetCatalogAppIconName>AppIcon</AssetCatalogAppIconName>
+		<CreatePackage>false</CreatePackage>
+		<GenerateBundle>false</GenerateBundle>
+
 		<!--<SkipStaticLibraryValidation>true</SkipStaticLibraryValidation>-->
 	</PropertyGroup>
 
 	<!-- macOS Catalyst Runtime Configuration -->
 	<PropertyGroup Condition="'$(TargetFramework)'=='net9.0-maccatalyst'">
 		<RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
+
+		<!-- ✅ ADDED: MacCatalyst Icon Properties -->
+		<AssetCatalogAppIconName>AppIcon</AssetCatalogAppIconName>
 	</PropertyGroup>
 
 </Project>
