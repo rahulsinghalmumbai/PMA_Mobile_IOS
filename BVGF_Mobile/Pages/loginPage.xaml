@@ -8,6 +8,10 @@
              NavigationPage.HasNavigationBar="False">
 
     <Grid Padding="40,20">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnBackgroundTapped"/>
+        </Grid.GestureRecognizers>
+
         <ScrollView>
             <VerticalStackLayout Spacing="25" VerticalOptions="Center">
 

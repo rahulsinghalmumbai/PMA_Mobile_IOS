@@ -2212,4 +2212,22 @@ public partial class homePage : ContentPage
             await DisplayAlert("Error", "Could not open advertisement link.", "OK");
         }
     }
+
+    private void OnBackgroundTapped(object sender, EventArgs e)
+    {
+        if (NameEntry.IsFocused)
+        {
+            NameEntry.Unfocus();
+        }else if(CityEntry.IsFocused)
+        {
+            CityEntry.Unfocus();
+        }else if(MobileEntry.IsFocused)
+        {
+            MobileEntry.Unfocus();
+        }else
+        {
+            CompanyEntry.Unfocus();
+        }
+    }
+
 }
