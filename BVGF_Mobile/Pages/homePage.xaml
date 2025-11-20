@@ -9,6 +9,11 @@
              NavigationPage.HasNavigationBar="False">
 
     <Grid RowSpacing="0">
+
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnBackgroundTapped"/>
+        </Grid.GestureRecognizers>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

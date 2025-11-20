@@ -194,6 +194,14 @@ namespace BVGF.Pages
 
         }
 
+        private void OnBackgroundTapped(object sender, EventArgs e)
+        {
+            if (PasswordEntry.IsFocused)
+            {
+                PasswordEntry.Unfocus();
+            }
+        }
+
         protected override bool OnBackButtonPressed()
         {
 
